@@ -13,7 +13,7 @@ FROM duckietown/${BASE_IMAGE}:${BASE_TAG}
 
 # define repository path
 ARG REPO_NAME
-ARG REPO_PATH="${CATKIN_WS_DIR}/src/${REPO_NAME}"
+ARG REPO_PATH="${SOURCE_DIR}/${REPO_NAME}"
 WORKDIR "${REPO_PATH}"
 
 # create repo directory
@@ -33,7 +33,7 @@ RUN apt-get update \
 RUN pip install -r ${REPO_PATH}/dependencies-py.txt
 
 # copy the source code
-COPY . "${REPO_PATH}/"
+COPY ./code/. "${REPO_PATH}/"
 
 # define launch script
 ENV LAUNCHFILE "${REPO_PATH}/launch.sh"
