@@ -21,7 +21,7 @@ RUN mkdir -p "${REPO_PATH}"
 
 # copy dependencies files only
 COPY ./dependencies-apt.txt "${REPO_PATH}/"
-COPY ./dependencies-py.txt "${REPO_PATH}/"
+COPY ./dependencies-py3.txt "${REPO_PATH}/"
 
 # install apt dependencies
 RUN apt-get update \
@@ -30,7 +30,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # install python dependencies
-RUN pip install -r ${REPO_PATH}/dependencies-py.txt
+RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 
 # copy the source code
 COPY ./code/. "${REPO_PATH}/"
