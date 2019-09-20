@@ -36,6 +36,7 @@ RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 COPY ./code/. "${REPO_PATH}/"
 
 # define launch script
+COPY ./launch.sh "${REPO_PATH}/"
 ENV LAUNCHFILE "${REPO_PATH}/launch.sh"
 
 # define command
