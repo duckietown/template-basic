@@ -35,6 +35,9 @@ RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 # copy the source code
 COPY ./code/. "${REPO_PATH}/"
 
+# copy avahi services
+COPY ./assets/avahi-services/. /avahi-services/
+
 # define launch script
 COPY ./launch.sh "${REPO_PATH}/"
 ENV LAUNCHFILE "${REPO_PATH}/launch.sh"
