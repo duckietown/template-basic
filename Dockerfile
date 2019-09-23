@@ -11,8 +11,15 @@ ARG BASE_IMAGE=dt-commons
 # define base image
 FROM duckietown/${BASE_IMAGE}:${BASE_TAG}
 
-# define repository path
+# check REPO_NAME
 ARG REPO_NAME
+RUN bash -c \
+  'if [ "${REPO_NAME}" = "<REPO_NAME_HERE>" ]; then \
+    >&2 echo "ERROR: You need to change the value of REPO_NAME inside Dockerfile."; \
+    exit 1; \
+  fi'
+
+# define repository path
 ARG REPO_PATH="${SOURCE_DIR}/${REPO_NAME}"
 WORKDIR "${REPO_PATH}"
 
