@@ -26,19 +26,15 @@ WORKDIR "${REPO_PATH}"
 # create repo directory
 RUN mkdir -p "${REPO_PATH}"
 
-# copy dependencies (APT)
-COPY ./dependencies-apt.txt "${REPO_PATH}/"
-
 # install apt dependencies
+COPY ./dependencies-apt.txt "${REPO_PATH}/"
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     $(awk -F: '/^[^#]/ { print $1 }' dependencies-apt.txt | uniq) \
   && rm -rf /var/lib/apt/lists/*
 
-# copy dependencies (PIP3)
-COPY ./dependencies-py3.txt "${REPO_PATH}/"
-
 # install python dependencies
+COPY ./dependencies-py3.txt "${REPO_PATH}/"
 RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 
 # copy the source code
