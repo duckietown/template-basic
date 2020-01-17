@@ -4,20 +4,16 @@ ARG REPO_NAME="<REPO_NAME_HERE>"
 # ==================================================>
 # ==> Do not change this code
 ARG ARCH=arm32v7
-ARG MAJOR=daffy
+ARG MAJOR=ente
 ARG BASE_TAG=${MAJOR}-${ARCH}
 ARG BASE_IMAGE=dt-commons
 
 # define base image
 FROM duckietown/${BASE_IMAGE}:${BASE_TAG}
 
-# check REPO_NAME
+# check build arguments
 ARG REPO_NAME
-RUN bash -c \
-  'if [ "${REPO_NAME}" = "<REPO_NAME_HERE>" ]; then \
-    >&2 echo "ERROR: You need to change the value of REPO_NAME inside Dockerfile."; \
-    exit 1; \
-  fi'
+RUN /utils/build_check ${REPO_NAME}
 
 # define repository path
 ARG REPO_PATH="${SOURCE_DIR}/${REPO_NAME}"
@@ -40,7 +36,7 @@ COPY ./dependencies-py3.txt "${REPO_PATH}/"
 RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 
 # copy the source code
-COPY ./code/. "${REPO_PATH}/"
+COPY ./packages/. "${REPO_PATH}/"
 
 # copy avahi services
 COPY ./assets/avahi-services/. /avahi-services/
