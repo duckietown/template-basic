@@ -21,10 +21,12 @@ RUN bash -c \
 
 # define repository path
 ARG REPO_PATH="${SOURCE_DIR}/${REPO_NAME}"
+ARG LAUNCH_PATH="${LAUNCH_DIR}/${REPO_NAME}"
 WORKDIR "${REPO_PATH}"
 
 # create repo directory
 RUN mkdir -p "${REPO_PATH}"
+RUN mkdir -p "${LAUNCH_PATH}"
 
 # install apt dependencies
 COPY ./dependencies-apt.txt "${REPO_PATH}/"
@@ -44,8 +46,8 @@ COPY ./code/. "${REPO_PATH}/"
 COPY ./assets/avahi-services/. /avahi-services/
 
 # define launch script
-COPY ./launch.sh "${REPO_PATH}/"
-ENV LAUNCHFILE "${REPO_PATH}/launch.sh"
+COPY ./launch.sh "${LAUNCH_PATH}/"
+ENV LAUNCHFILE "${LAUNCH_PATH}/launch.sh"
 
 # define command
 CMD ["bash", "-c", "${LAUNCHFILE}"]
