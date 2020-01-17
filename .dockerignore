@@ -3,7 +3,7 @@
 
 # Allow files and directories
 !assets
-!code
+!packages
 !dependencies-apt.txt
 !dependencies-py3.txt
 !launch.sh
