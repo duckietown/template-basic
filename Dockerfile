@@ -1,8 +1,9 @@
 # parameters
 ARG REPO_NAME="<REPO_NAME_HERE>"
+ARG MAINTAINER="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"
 
 # ==================================================>
-# ==> Do not change this code
+# ==> Do not change the code below this line
 ARG ARCH=arm32v7
 ARG MAJOR=ente
 ARG BASE_TAG=${MAJOR}-${ARCH}
@@ -13,7 +14,8 @@ FROM duckietown/${BASE_IMAGE}:${BASE_TAG}
 
 # check build arguments
 ARG REPO_NAME
-RUN /utils/build_check ${REPO_NAME}
+ARG MAINTAINER
+RUN /utils/build_check "${REPO_NAME}" "${MAINTAINER}"
 
 # define repository path
 ARG REPO_PATH="${SOURCE_DIR}/${REPO_NAME}"
@@ -41,12 +43,10 @@ COPY ./packages/. "${REPO_PATH}/"
 # copy avahi services
 COPY ./assets/avahi-services/. /avahi-services/
 
-# define launch script
-COPY ./launch.sh "${LAUNCH_PATH}/"
-ENV LAUNCHFILE "${LAUNCH_PATH}/launch.sh"
-
-# define command
-CMD ["bash", "-c", "${LAUNCHFILE}"]
+# install launcher scripts
+COPY ./launch/* "${LAUNCH_PATH}/"
+COPY ./launch/default.sh "${LAUNCH_PATH}/"
+RUN /utils/install_launchers "${LAUNCH_PATH}"
 
 # store module name
 LABEL org.duckietown.label.module.type="${REPO_NAME}"
@@ -62,8 +62,6 @@ LABEL org.duckietown.label.code.location="${REPO_PATH}"
 LABEL org.duckietown.label.base.major="${MAJOR}"
 LABEL org.duckietown.label.base.image="${BASE_IMAGE}"
 LABEL org.duckietown.label.base.tag="${BASE_TAG}"
-# <== Do not change this code
+LABEL org.duckietown.label.maintainer="${MAINTAINER}"
+# <== Do not change the code above this line
 # <==================================================
-
-# maintainer
-LABEL maintainer="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"

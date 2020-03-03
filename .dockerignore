@@ -6,7 +6,7 @@
 !packages
 !dependencies-apt.txt
 !dependencies-py3.txt
-!launch.sh
+!launch
 
 # YOUR FILES LISTED BELOW THIS LINE (IMPORTANT: PREPEND !)
 # ----------------------------------------------------------------------------
