@@ -40,12 +40,9 @@ RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 # copy the source code
 COPY ./packages/. "${REPO_PATH}/"
 
-# copy avahi services
-COPY ./assets/avahi-services/. /avahi-services/
-
 # install launcher scripts
-COPY ./launch/* "${LAUNCH_PATH}/"
-COPY ./launch/default.sh "${LAUNCH_PATH}/"
+COPY ./launchers/* "${LAUNCH_PATH}/"
+COPY ./launchers/default.sh "${LAUNCH_PATH}/"
 RUN /utils/install_launchers "${LAUNCH_PATH}"
 
 # store module name
