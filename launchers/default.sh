@@ -10,7 +10,7 @@ dt-launchfile-init
 
 
 # NOTE: Use the variable CODE_DIR to know the absolute path to your code
-# NOTE: Use `dt_exec COMMAND` to run the main process (blocking process)
+# NOTE: Use `dt-exec COMMAND` to run the main process (blocking process)
 
 # launching app
 dt-exec echo "This is an empty launch script. Update it to launch your application."
