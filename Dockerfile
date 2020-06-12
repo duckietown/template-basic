@@ -5,7 +5,7 @@ ARG MAINTAINER="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"
 # ==================================================>
 # ==> Do not change the code below this line
 ARG ARCH=arm32v7
-ARG MAJOR=ente
+ARG MAJOR=daffy
 ARG BASE_TAG=${MAJOR}-${ARCH}
 ARG BASE_IMAGE=dt-commons
 
