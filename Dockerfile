@@ -12,19 +12,29 @@ ARG BASE_IMAGE=dt-commons
 # define base image
 FROM duckietown/${BASE_IMAGE}:${BASE_TAG}
 
-# check build arguments
+# recall all arguments
+ARG ARCH
+ARG MAJOR
 ARG REPO_NAME
 ARG MAINTAINER
+ARG BASE_TAG
+ARG BASE_IMAGE
+
+# keep some arguments as environment variables
+ENV DT_MODULE_TYPE "${REPO_NAME}"
+ENV DT_MAINTAINER "${MAINTAINER}"
+
+# check build arguments
 RUN /utils/build_check "${REPO_NAME}" "${MAINTAINER}"
 
-# define repository path
+# define/create repository path
 ARG REPO_PATH="${SOURCE_DIR}/${REPO_NAME}"
 ARG LAUNCH_PATH="${LAUNCH_DIR}/${REPO_NAME}"
-WORKDIR "${REPO_PATH}"
-
-# create repo directory
 RUN mkdir -p "${REPO_PATH}"
 RUN mkdir -p "${LAUNCH_PATH}"
+ENV DT_REPO_PATH "${REPO_PATH}"
+ENV DT_LAUNCH_PATH "${LAUNCH_PATH}"
+WORKDIR "${REPO_PATH}"
 
 # install apt dependencies
 COPY ./dependencies-apt.txt "${REPO_PATH}/"
@@ -45,15 +55,8 @@ COPY ./launchers/* "${LAUNCH_PATH}/"
 COPY ./launchers/default.sh "${LAUNCH_PATH}/"
 RUN /utils/install_launchers "${LAUNCH_PATH}"
 
-# store module name
-LABEL org.duckietown.label.module.type="${REPO_NAME}"
-ENV DT_MODULE_TYPE "${REPO_NAME}"
-
 # store module metadata
-ARG ARCH
-ARG MAJOR
-ARG BASE_TAG
-ARG BASE_IMAGE
+LABEL org.duckietown.label.module.type="${REPO_NAME}"
 LABEL org.duckietown.label.architecture="${ARCH}"
 LABEL org.duckietown.label.code.location="${REPO_PATH}"
 LABEL org.duckietown.label.base.major="${MAJOR}"
