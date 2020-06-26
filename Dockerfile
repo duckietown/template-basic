@@ -56,12 +56,12 @@ COPY ./launchers/default.sh "${LAUNCH_PATH}/"
 RUN /utils/install_launchers "${LAUNCH_PATH}"
 
 # store module metadata
-LABEL org.duckietown.label.module.type="${REPO_NAME}"
-LABEL org.duckietown.label.architecture="${ARCH}"
-LABEL org.duckietown.label.code.location="${REPO_PATH}"
-LABEL org.duckietown.label.base.major="${MAJOR}"
-LABEL org.duckietown.label.base.image="${BASE_IMAGE}"
-LABEL org.duckietown.label.base.tag="${BASE_TAG}"
-LABEL org.duckietown.label.maintainer="${MAINTAINER}"
+LABEL org.duckietown.label.module.type="${REPO_NAME}" \
+    org.duckietown.label.architecture="${ARCH}" \
+    org.duckietown.label.code.location="${REPO_PATH}" \
+    org.duckietown.label.base.major="${MAJOR}" \
+    org.duckietown.label.base.image="${BASE_IMAGE}" \
+    org.duckietown.label.base.tag="${BASE_TAG}" \
+    org.duckietown.label.maintainer="${MAINTAINER}"
 # <== Do not change the code above this line
 # <==================================================
