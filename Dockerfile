@@ -5,8 +5,8 @@ ARG MAINTAINER="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"
 # ==================================================>
 # ==> Do not change the code below this line
 ARG ARCH=arm32v7
-ARG MAJOR=daffy
-ARG BASE_TAG=${MAJOR}-${ARCH}
+ARG DISTRO=daffy
+ARG BASE_TAG=${DISTRO}-${ARCH}
 ARG BASE_IMAGE=dt-commons
 
 # define base image
@@ -14,7 +14,7 @@ FROM duckietown/${BASE_IMAGE}:${BASE_TAG}
 
 # recall all arguments
 ARG ARCH
-ARG MAJOR
+ARG DISTRO
 ARG REPO_NAME
 ARG MAINTAINER
 ARG BASE_TAG
@@ -44,6 +44,10 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # install python dependencies
+COPY ./dependencies-py.txt "${REPO_PATH}/"
+RUN pip install -r ${REPO_PATH}/dependencies-py.txt
+
+# install python3 dependencies
 COPY ./dependencies-py3.txt "${REPO_PATH}/"
 RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 
@@ -59,7 +63,7 @@ RUN /utils/install_launchers "${LAUNCH_PATH}"
 LABEL org.duckietown.label.module.type="${REPO_NAME}" \
     org.duckietown.label.architecture="${ARCH}" \
     org.duckietown.label.code.location="${REPO_PATH}" \
-    org.duckietown.label.base.major="${MAJOR}" \
+    org.duckietown.label.base.distro="${DISTRO}" \
     org.duckietown.label.base.image="${BASE_IMAGE}" \
     org.duckietown.label.base.tag="${BASE_TAG}" \
     org.duckietown.label.maintainer="${MAINTAINER}"

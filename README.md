@@ -23,19 +23,14 @@ a template for your new repository.
 
 ### 3. Define dependencies
 
-List the dependencies in the files `dependencies-apt.txt` and
-`dependencies-py.txt` (apt packages and pip packages respectively).
+List the dependencies in the files `dependencies-apt.txt`,
+`dependencies-py.txt`, and `dependencies-py3.txt`.
 
 
 ### 4. Place your code
 
-Place your code in the directory `/code` of
+Place your code in the directory `/packages/` of
 your new repository.
-
-**NOTE:** Do not use absolute paths in your code, the code you place 
-under `/code` will be copied to a different location later. Use the
-variable `CODE_DIR` instead.
-
 
 
 ### 5. Setup launchers
