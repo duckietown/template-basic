@@ -1,7 +1,0 @@
-version: 1
-
-configurations:
-
-  default:
-    volumes:
-      - /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket
