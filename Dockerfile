@@ -59,7 +59,7 @@ COPY ./dependencies-py3.txt "${REPO_PATH}/"
 RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 
 # copy the source code
-COPY . "${REPO_PATH}/"
+COPY ./packages "${REPO_PATH}/packages"
 
 # install launcher scripts
 COPY ./launchers/. "${LAUNCH_PATH}/"
