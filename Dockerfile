@@ -4,7 +4,7 @@ ARG REPO_NAME="<REPO_NAME_HERE>"
 # ==================================================>
 # ==> Do not change this code
 ARG ARCH=arm32v7
-ARG MAJOR=daffy
+ARG MAJOR=ente
 ARG BASE_TAG=${MAJOR}-${ARCH}
 ARG BASE_IMAGE=dt-commons
 
