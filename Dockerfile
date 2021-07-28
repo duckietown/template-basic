@@ -3,13 +3,14 @@ ARG REPO_NAME="<REPO_NAME_HERE>"
 
 # ==================================================>
 # ==> Do not change this code
-ARG ARCH=arm32v7
+ARG ARCH=arm64v8
 ARG MAJOR=ente
 ARG BASE_TAG=${MAJOR}-${ARCH}
 ARG BASE_IMAGE=dt-commons
 
 # define base image
-FROM duckietown/${BASE_IMAGE}:${BASE_TAG}
+ARG DOCKER_REGISTRY=docker.io
+FROM ${DOCKER_REGISTRY}/duckietown/${BASE_IMAGE}:${BASE_TAG}
 
 # check REPO_NAME
 ARG REPO_NAME
