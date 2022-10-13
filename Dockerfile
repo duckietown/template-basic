@@ -7,9 +7,8 @@ ARG ICON="cube"
 
 # ==================================================>
 # ==> Do not change the code below this line
-ARG ARCH=arm64v8
 ARG DISTRO=ente
-ARG BASE_TAG=${DISTRO}-${ARCH}
+ARG BASE_TAG=${DISTRO}
 ARG BASE_IMAGE=dt-commons
 ARG LAUNCHER=default
 
@@ -18,7 +17,6 @@ ARG DOCKER_REGISTRY=docker.io
 FROM ${DOCKER_REGISTRY}/duckietown/${BASE_IMAGE}:${BASE_TAG} as BASE
 
 # recall all arguments
-ARG ARCH
 ARG DISTRO
 ARG REPO_NAME
 ARG DESCRIPTION
@@ -27,6 +25,11 @@ ARG ICON
 ARG BASE_TAG
 ARG BASE_IMAGE
 ARG LAUNCHER
+# - buildkit
+ARG TARGETPLATFORM
+ARG TARGETOS
+ARG TARGETARCH
+ARG TARGETVARIANT
 
 # check build arguments
 RUN dt-build-env-check "${REPO_NAME}" "${MAINTAINER}" "${DESCRIPTION}"
@@ -74,7 +77,9 @@ CMD ["bash", "-c", "dt-launcher-${DT_LAUNCHER}"]
 LABEL org.duckietown.label.module.type="${REPO_NAME}" \
     org.duckietown.label.module.description="${DESCRIPTION}" \
     org.duckietown.label.module.icon="${ICON}" \
-    org.duckietown.label.architecture="${ARCH}" \
+    org.duckietown.label.platform.os="${TARGETOS}" \
+    org.duckietown.label.platform.architecture="${TARGETARCH}" \
+    org.duckietown.label.platform.variant="${TARGETVARIANT}" \
     org.duckietown.label.code.location="${REPO_PATH}" \
     org.duckietown.label.code.version.distro="${DISTRO}" \
     org.duckietown.label.base.image="${BASE_IMAGE}" \
