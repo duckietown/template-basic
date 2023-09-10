@@ -1,21 +1,22 @@
 # parameters
-ARG REPO_NAME="<REPO_NAME_HERE>"
-ARG DESCRIPTION="<DESCRIPTION_HERE>"
-ARG MAINTAINER="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"
+ARG REPO_NAME
+ARG DESCRIPTION
+ARG MAINTAINER
 # pick an icon from: https://fontawesome.com/v4.7.0/icons/
 ARG ICON="cube"
 
 # ==================================================>
 # ==> Do not change the code below this line
 ARG ARCH
-ARG DISTRO=ente
-ARG DOCKER_REGISTRY=docker.io
-ARG BASE_IMAGE=dt-commons
+ARG DISTRO
+ARG DOCKER_REGISTRY
+ARG BASE_IMAGE
+ARG BASE_USER=duckietown
 ARG BASE_TAG=${DISTRO}-${ARCH}
 ARG LAUNCHER=default
 
 # define base image
-FROM ${DOCKER_REGISTRY}/duckietown/${BASE_IMAGE}:${BASE_TAG} as base
+FROM ${DOCKER_REGISTRY}/${BASE_USER}/${BASE_IMAGE}:${BASE_TAG} as base
 
 # recall all arguments
 ARG DISTRO
@@ -33,7 +34,14 @@ ARG TARGETARCH
 ARG TARGETVARIANT
 
 # check build arguments
-RUN dt-build-env-check "${REPO_NAME}" "${MAINTAINER}" "${DESCRIPTION}"
+RUN dt-args-check \
+    "REPO_NAME" "${REPO_NAME}" \
+    "DESCRIPTION" "${DESCRIPTION}" \
+    "MAINTAINER" "${MAINTAINER}" \
+    "ARCH" "${ARCH}" \
+    "DISTRO" "${DISTRO}" \
+    "DOCKER_REGISTRY" "${DOCKER_REGISTRY}" \
+    "BASE_IMAGE" "${BASE_IMAGE}"
 
 # define/create repository path
 ARG REPO_PATH="${SOURCE_DIR}/${REPO_NAME}"
