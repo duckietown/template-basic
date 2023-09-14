@@ -88,12 +88,12 @@ CMD ["bash", "-c", "dt-launcher-${DT_LAUNCHER}"]
 # store module metadata
 LABEL \
     # module info
-    org.duckietown.label.module.name="${PROJECT_NAME}" \
-    org.duckietown.label.module.description="${PROJECT_DESCRIPTION}" \
-    org.duckietown.label.module.maintainer="${PROJECT_MAINTAINER}" \
-    org.duckietown.label.module.icon="${PROJECT_ICON}" \
-    org.duckietown.label.module.path="${PROJECT_PATH}" \
-    org.duckietown.label.module.launchers.path="${PROJECT_LAUNCHERS_PATH}" \
+    org.duckietown.label.project.name="${PROJECT_NAME}" \
+    org.duckietown.label.project.description="${PROJECT_DESCRIPTION}" \
+    org.duckietown.label.project.maintainer="${PROJECT_MAINTAINER}" \
+    org.duckietown.label.project.icon="${PROJECT_ICON}" \
+    org.duckietown.label.project.path="${PROJECT_PATH}" \
+    org.duckietown.label.project.launchers.path="${PROJECT_LAUNCHERS_PATH}" \
     # format
     org.duckietown.label.format.version="${PROJECT_FORMAT_VERSION}" \
     # platform info
