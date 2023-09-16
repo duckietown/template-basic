@@ -22,6 +22,7 @@ FROM ${DOCKER_REGISTRY}/${BASE_ORGANIZATION}/${BASE_REPOSITORY}:${BASE_TAG} as b
 # recall all arguments
 ARG ARCH
 ARG DISTRO
+ARG DOCKER_REGISTRY
 ARG PROJECT_NAME
 ARG PROJECT_DESCRIPTION
 ARG PROJECT_MAINTAINER
@@ -81,6 +82,10 @@ COPY ./packages "${PROJECT_PATH}/packages"
 # install launcher scripts
 COPY ./launchers/. "${PROJECT_LAUNCHERS_PATH}/"
 RUN dt-install-launchers "${PROJECT_LAUNCHERS_PATH}"
+
+# install scripts
+COPY ./assets/entrypoint.d "${REPO_PATH}/assets/entrypoint.d"
+COPY ./assets/environment.d "${REPO_PATH}/assets/environment.d"
 
 # define default command
 CMD ["bash", "-c", "dt-launcher-${DT_LAUNCHER}"]
