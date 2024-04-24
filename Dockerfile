@@ -83,10 +83,6 @@ COPY ./packages "${PROJECT_PATH}/packages"
 COPY ./launchers/. "${PROJECT_LAUNCHERS_PATH}/"
 RUN dt-install-launchers "${PROJECT_LAUNCHERS_PATH}"
 
-# install scripts
-COPY ./assets/entrypoint.d "${PROJECT_PATH}/assets/entrypoint.d"
-COPY ./assets/environment.d "${PROJECT_PATH}/assets/environment.d"
-
 # define default command
 CMD ["bash", "-c", "dt-launcher-${DT_LAUNCHER}"]
 
